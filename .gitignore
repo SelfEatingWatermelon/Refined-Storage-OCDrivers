@@ -17,6 +17,10 @@ out
 build
 .gradle
 
+# RS
+refinedstorage
+settings.gradle
+
 # other
 eclipse
 run

@@ -1,16 +1,16 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "OpenComputers|example_block_driver",
+  "name": "OpenComputers Addon - Refined Storage",
+  "description": "A Open Computer driver for Refined Storage",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["davidog23"],
+  "credits": "MightyPirates for Open Computers and Raoul for Refined Storage",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["Open Computers 1.6.0.4+", "Refined Storage 1.2.5+"]
 }
 ]
