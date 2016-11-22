@@ -14,6 +14,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +33,7 @@ public class NetworkDriver extends DriverSidedTileEntity {
 
     public class Environment extends li.cil.oc.api.prefab.ManagedEnvironment {
         protected final INetworkNode rsNode;
-        protected final INetworkMaster rsNetwork;
+        protected INetworkMaster rsNetwork;
 
         public Environment(INetworkNode rsNode) {
             this.rsNode = rsNode;
@@ -40,9 +41,13 @@ public class NetworkDriver extends DriverSidedTileEntity {
             setNode(Network.newNode(this, Visibility.Network).withComponent("rs_network", Visibility.Network).create());
         }
 
-        @Callback(doc = "function():table -- Add to the filter the specified item")
+        @Callback(doc = "function():table -- A table with the items in the network")
         public Object[] listItems(Context context, Arguments arguments) {
-            return new Object[] {rsNetwork.getItemStorageCache().getList().getStacks()};
+            if (rsNetwork == null) rsNetwork = rsNode.getNetwork();
+            Map<String, Integer> result = rsNetwork.getItemStorageCache()
+                    .getList().getStacks().stream()
+                    .collect(Collectors.toMap(ItemStack::getUnlocalizedName, stack -> stack.stackSize));
+            return new Object[] {result};
         }
     }
 }
